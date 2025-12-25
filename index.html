@@ -1,0 +1,1063 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kế Toán Diệu Tâm | Hệ Sinh Thái Kế Toán & Quản Trị Doanh Nghiệp</title>
+    <meta name="description" content="Kế Toán Diệu Tâm - Giải pháp kế toán, thuế và pháp lý doanh nghiệp toàn diện. Ứng dụng Agentic AI, cam kết bảo mật trọn đời.">
+    <style>
+        /* --- 1. RESET & VARIABLES --- */
+        :root {
+            --primary-color: #0F2C59; /* Deep Navy */
+            --accent-color: #D4AF37;  /* Gold */
+            --text-color: #333333;
+            --light-bg: #F8F9FA;
+            --white: #FFFFFF;
+            --border-radius: 8px;
+            --transition: all 0.3s ease;
+            --shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--white);
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        /* --- 2. UTILITIES --- */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section {
+            padding: 80px 0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .heading {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .sub-heading {
+            display: block;
+            font-weight: 600;
+            color: var(--accent-color);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+        }
+
+        .divider {
+            width: 60px;
+            height: 4px;
+            background-color: var(--accent-color);
+            margin: 0 auto;
+            border-radius: 2px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: var(--transition);
+            cursor: pointer;
+            white-space: nowrap;
+        }
+
+        .btn-primary {
+            background-color: var(--accent-color);
+            color: var(--white);
+            border: 2px solid var(--accent-color);
+        }
+
+        .btn-primary:hover {
+            background-color: transparent;
+            color: var(--accent-color);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            color: var(--white);
+            border: 2px solid var(--white);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--white);
+            color: var(--primary-color);
+        }
+
+        /* Biến thể nút outline màu tối cho nền sáng */
+        .pricing .btn-outline {
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+        }
+        .pricing .btn-outline:hover {
+            background-color: var(--primary-color);
+            color: var(--white);
+        }
+
+        /* --- 3. HEADER & NAV --- */
+        .header {
+            background-color: var(--white);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            height: 70px;
+            display: flex;
+            align-items: center;
+            transition: var(--transition);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--primary-color);
+            letter-spacing: -0.5px;
+        }
+
+        .logo span {
+            color: var(--accent-color);
+            font-weight: 400;
+        }
+
+        .navbar {
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-list {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .nav-link {
+            font-weight: 500;
+            transition: var(--transition);
+            font-size: 0.95rem;
+        }
+
+        .nav-link:not(.btn-contact):hover {
+            color: var(--accent-color);
+        }
+
+        .btn-contact {
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 8px 20px;
+            border-radius: 4px;
+        }
+
+        .btn-contact:hover {
+            background-color: var(--accent-color);
+            color: var(--white);
+        }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+        }
+
+        .bar {
+            display: block;
+            width: 25px;
+            height: 3px;
+            margin: 5px auto;
+            background-color: var(--primary-color);
+            transition: var(--transition);
+        }
+
+        /* --- 4. HERO SECTION --- */
+        .hero {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #051937 100%);
+            color: var(--white);
+            padding: 180px 0 120px;
+            text-align: center;
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Trang trí nền nhẹ */
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            right: -50px;
+            width: 300px;
+            height: 300px;
+            border: 40px solid rgba(255,255,255,0.03);
+            border-radius: 50%;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -50px;
+            left: -50px;
+            width: 200px;
+            height: 200px;
+            border: 20px solid rgba(212, 175, 55, 0.1);
+            border-radius: 50%;
+        }
+
+        .hero-subtitle {
+            font-size: 1.1rem;
+            color: var(--accent-color);
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            letter-spacing: 3px;
+            font-weight: 600;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            margin-bottom: 25px;
+            line-height: 1.2;
+            font-weight: 800;
+        }
+
+        .hero-desc {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 40px;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 300;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        /* --- 5. GRID SYSTEM & CARDS --- */
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+        }
+
+        .card {
+            background: var(--white);
+            padding: 30px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border: 1px solid #eee;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+
+        /* --- 6. ABOUT SECTION --- */
+        .feature-card {
+            text-align: center;
+            padding: 40px 30px;
+        }
+
+        .icon-box {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            background: var(--light-bg);
+            width: 80px;
+            height: 80px;
+            line-height: 80px;
+            border-radius: 50%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .feature-card h3 {
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+
+        /* --- 7. SERVICES SECTION --- */
+        .services {
+            background-color: var(--light-bg);
+        }
+        
+        .service-item {
+            background: var(--white);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            height: 100%;
+            transition: var(--transition);
+        }
+
+        .service-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .service-img-placeholder {
+            height: 160px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: var(--primary-color);
+            font-size: 1.2rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .service-content {
+            padding: 30px;
+        }
+
+        .service-content h3 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+
+        .service-list li {
+            position: relative;
+            padding-left: 20px;
+            margin-bottom: 10px;
+            font-size: 0.95rem;
+            color: #555;
+        }
+
+        .service-list li::before {
+            content: "•";
+            color: var(--accent-color);
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+            font-size: 1.2em;
+            line-height: 1;
+        }
+
+        /* --- 8. TECH SECTION --- */
+        .tech-section {
+            background-color: var(--primary-color);
+            color: var(--white);
+            position: relative;
+        }
+
+        .tech-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .text-white { color: var(--white); }
+        .text-accent { color: var(--accent-color); }
+
+        .tech-desc {
+            margin-bottom: 30px;
+            color: rgba(255,255,255,0.9);
+            font-size: 1.05rem;
+        }
+
+        .tech-list li {
+            margin-bottom: 20px;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .tech-list li strong {
+            color: var(--accent-color);
+            margin-right: 8px;
+            min-width: 100px;
+        }
+
+        /* Mockup CSS Only */
+        .mockup-screen {
+            background: #fff;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .mockup-header {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .dot { width: 12px; height: 12px; border-radius: 50%; }
+        .red { background: #ff5f56; }
+        .yellow { background: #ffbd2e; }
+        .green { background: #27c93f; }
+
+        .mockup-body {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .chart-line {
+            height: 120px;
+            background: linear-gradient(180deg, rgba(15, 44, 89, 0.1) 0%, rgba(255,255,255,0) 100%);
+            border-radius: 4px;
+            border-top: 2px solid var(--primary-color);
+            position: relative;
+        }
+        
+        .chart-bar {
+            height: 10px;
+            width: 60%;
+            background: #eee;
+            border-radius: 5px;
+        }
+        
+        .chart-bar::after {
+            content: '';
+            display: block;
+            height: 100%;
+            width: 70%;
+            background: var(--accent-color);
+            border-radius: 5px;
+        }
+
+        .alert-box {
+            background: #ffebee;
+            color: #c62828;
+            padding: 12px;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+        }
+
+        .success-box {
+            background: #e8f5e9;
+            color: #2e7d32;
+            padding: 12px;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            font-weight: bold;
+        }
+
+        /* --- 9. ACADEMY SECTION --- */
+        .academy {
+            background: #fff;
+        }
+        
+        .course-card {
+            background: var(--light-bg);
+            padding: 40px;
+            border-radius: var(--border-radius);
+            border-left: 5px solid var(--accent-color);
+        }
+        
+        .course-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            font-size: 1.4rem;
+        }
+
+        /* --- 10. BLOG SECTION STYLES --- */
+        .blog-section {
+            background-color: var(--white);
+        }
+
+        .blog-card {
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .blog-date {
+            font-size: 0.85rem;
+            color: #888;
+            margin-bottom: 10px;
+        }
+
+        .blog-title {
+            font-size: 1.2rem;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .blog-excerpt {
+            font-size: 0.95rem;
+            color: #555;
+            flex-grow: 1;
+        }
+
+        .read-more-btn {
+            margin-top: 20px;
+            color: var(--accent-color);
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            align-self: flex-start;
+        }
+
+        /* --- 10. PRICING SECTION --- */
+        .pricing {
+            background-color: var(--light-bg);
+        }
+
+        .pricing-table {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            align-items: center; /* Để căn giữa chiều dọc */
+        }
+
+        .pricing-card {
+            background: var(--white);
+            padding: 40px 30px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            width: 320px;
+            text-align: center;
+            position: relative;
+            border: 1px solid #ddd;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .pricing-card.popular {
+            border: 2px solid var(--accent-color);
+            transform: scale(1.05);
+            z-index: 2;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .pricing-card.popular:hover {
+            transform: scale(1.08);
+        }
+
+        .tag {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--accent-color);
+            color: var(--white);
+            padding: 5px 20px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        .price-header {
+            margin-bottom: 20px;
+        }
+        
+        .price-header h3 {
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+
+        .price {
+            display: block;
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--primary-color);
+            margin: 15px 0;
+        }
+
+        .price small {
+            font-size: 1rem;
+            font-weight: normal;
+            color: #666;
+        }
+        
+        .price-body {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .price-body ul {
+            margin-bottom: 30px;
+            text-align: left;
+        }
+
+        .price-body li {
+            margin-bottom: 12px;
+            padding-bottom: 12px;
+            border-bottom: 1px dashed #eee;
+            font-size: 0.95rem;
+        }
+        
+        .price-body li:last-child {
+            border-bottom: none;
+        }
+
+        /* --- 11. FOOTER --- */
+        footer {
+            background-color: #051937;
+            color: var(--white);
+            padding: 80px 0 30px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1fr;
+            gap: 50px;
+            margin-bottom: 50px;
+        }
+
+        .footer-col h3 {
+            color: var(--accent-color);
+            margin-bottom: 25px;
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .footer-col p {
+            margin-bottom: 12px;
+            color: rgba(255,255,255,0.7);
+            font-size: 0.95rem;
+            line-height: 1.8;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-links a {
+            display: inline-block;
+            width: 35px;
+            height: 35px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            transition: var(--transition);
+        }
+        
+        .social-links a:hover {
+            background: var(--accent-color);
+            color: var(--primary-color);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.5);
+        }
+
+        /* --- 12. RESPONSIVE MEDIA QUERIES --- */
+        @media (max-width: 992px) {
+            .grid-3 { grid-template-columns: repeat(2, 1fr); }
+            .tech-container { grid-template-columns: 1fr; }
+            .hero-title { font-size: 2.8rem; }
+            .pricing-table { flex-direction: column; }
+            .pricing-card { width: 100%; max-width: 400px; }
+            .pricing-card.popular { transform: scale(1); }
+        }
+
+        @media (max-width: 768px) {
+            .hamburger { display: block; }
+            .hamburger.active .bar:nth-child(2) { opacity: 0; }
+            .hamburger.active .bar:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+            .hamburger.active .bar:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
+            .nav-list {
+                position: fixed;
+                left: -100%;
+                top: 70px;
+                flex-direction: column;
+                background-color: var(--white);
+                width: 100%;
+                height: calc(100vh - 70px);
+                text-align: center;
+                transition: 0.3s;
+                box-shadow: 0 10px 10px rgba(0,0,0,0.1);
+                padding-top: 50px;
+                align-items: center;
+            }
+
+            .nav-list.active { left: 0; }
+            .nav-list li { width: 100%; margin: 15px 0; }
+
+            .grid-3, .grid-2 { grid-template-columns: 1fr; }
+            
+            .hero-title { font-size: 2.2rem; }
+            .hero-buttons { flex-direction: column; width: 100%; }
+            .hero-buttons .btn { width: 100%; }
+            
+            .footer-content { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header class="header" id="header">
+        <div class="container header-container">
+            <a href="index.html" class="logo">DIỆU TÂM <span>ACCOUNTING</span></a>
+            
+            <nav class="navbar">
+                <ul class="nav-list">
+                    <li><a href="index.html#about" class="nav-link">Về Chúng Tôi</a></li>
+                    <li><a href="index.html#services" class="nav-link">Dịch Vụ</a></li>
+                    <li><a href="index.html#technology" class="nav-link">Công Nghệ AI</a></li>
+                    <li><a href="blog.html" class="nav-link">Tin Tức</a></li>
+                    <li><a href="index.html#pricing" class="nav-link">Bảng Giá</a></li>
+                    <li><a href="index.html#contact" class="nav-link btn-contact">Liên Hệ Ngay</a></li>
+                </ul>
+            </nav>
+
+            <div class="hamburger" id="hamburger">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+            </div>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="hero">
+        <div class="container hero-content">
+            <h2 class="hero-subtitle">Hệ Sinh Thái Kế Toán & Quản Trị</h2>
+            <h1 class="hero-title">Diệu từ Trí – Tâm từ Lòng</h1>
+            <p class="hero-desc">
+                Kết hợp trí tuệ nhân tạo Agentic AI và tinh thần phục vụ Omotenashi. 
+                Chúng tôi không chỉ làm kế toán, chúng tôi định vị lộ trình thịnh vượng cho doanh nghiệp của bạn.
+            </p>
+            <div class="hero-buttons">
+                <a href="#contact" class="btn btn-primary">Nhận Tư Vấn Miễn Phí</a>
+                <a href="#services" class="btn btn-outline">Tìm Hiểu Dịch Vụ</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT SECTION -->
+    <section id="about" class="section about">
+        <div class="container">
+            <div class="section-header">
+                <span class="sub-heading">Triết Lý Kinh Doanh</span>
+                <h2 class="heading">Tại Sao Chọn Diệu Tâm?</h2>
+                <div class="divider"></div>
+            </div>
+            
+            <div class="grid-3">
+                <div class="card feature-card">
+                    <div class="icon-box">🛡️</div>
+                    <h3>Bảo Mật Tuyệt Đối</h3>
+                    <p>Cam kết bảo mật thông tin trọn đời, ngay cả khi ngừng hợp tác. Chúng tôi coi dữ liệu của bạn là tài sản quý giá nhất.</p>
+                </div>
+                <div class="card feature-card">
+                    <div class="icon-box">⚖️</div>
+                    <h3>Trách Nhiệm Pháp Lý</h3>
+                    <p>Sẵn sàng đại diện giải trình thanh tra. Chịu trách nhiệm bồi hoàn 100% nếu lỗi nghiệp vụ phát sinh từ chúng tôi.</p>
+                </div>
+                <div class="card feature-card">
+                    <div class="icon-box">🎓</div>
+                    <h3>Chuyên Gia Hàng Đầu</h3>
+                    <p>Đội ngũ sở hữu chứng chỉ ASEAN CPA, VN CPA. Chúng tôi là đối tác chiến lược, không chỉ là người làm thuê.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SERVICES SECTION -->
+    <section id="services" class="section services">
+        <div class="container">
+            <div class="section-header">
+                <span class="sub-heading">Giải Pháp One-Stop Service</span>
+                <h2 class="heading">Hệ Sinh Thái Dịch Vụ</h2>
+                <div class="divider"></div>
+            </div>
+
+            <div class="grid-3">
+                <!-- Service 1 -->
+                <div class="service-item">
+                    <div class="service-img-placeholder" style="background-color: #e3f2fd;">
+                        <span>Pháp Lý & Thành Lập</span>
+                    </div>
+                    <div class="service-content">
+                        <h3>Pháp Lý Doanh Nghiệp</h3>
+                        <ul class="service-list">
+                            <li>Thành lập công ty trọn gói (3 ngày).</li>
+                            <li>Thay đổi ĐKKD, vốn, địa chỉ.</li>
+                            <li>Giấy phép lao động (Work Permit).</li>
+                            <li>Đăng ký nhãn hiệu độc quyền.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Service 2 -->
+                <div class="service-item">
+                    <div class="service-img-placeholder" style="background-color: #fff8e1;">
+                        <span>Kế Toán & Thuế</span>
+                    </div>
+                    <div class="service-content">
+                        <h3>Kế Toán - Thuế Chuyên Sâu</h3>
+                        <ul class="service-list">
+                            <li>Báo cáo thuế, Quyết toán TNDN/TNCN.</li>
+                            <li>Gỡ rối sổ sách, dọn dẹp hệ thống.</li>
+                            <li>Hoàn thuế GTGT tối ưu dòng tiền.</li>
+                            <li>Kế toán FDI (Chuẩn VAS/IFRS).</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Service 3 -->
+                <div class="service-item">
+                    <div class="service-img-placeholder" style="background-color: #e8f5e9;">
+                        <span>Nhân Sự & C&B</span>
+                    </div>
+                    <div class="service-content">
+                        <h3>Quản Trị Nhân Sự (C&B)</h3>
+                        <ul class="service-list">
+                            <li>Tính lương & Bảo mật thu nhập.</li>
+                            <li>Quản lý Bảo hiểm xã hội trọn gói.</li>
+                            <li>Giải quyết chế độ thai sản, ốm đau.</li>
+                            <li>Xây dựng thang bảng lương chuẩn.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TECH / AI SECTION -->
+    <section id="technology" class="section tech-section">
+        <div class="container tech-container">
+            <div class="tech-text">
+                <span class="sub-heading text-accent">Tiên Phong Công Nghệ</span>
+                <h2 class="heading text-white">Nền Tảng Quản Trị Số & Agentic AI</h2>
+                <p class="tech-desc">
+                    Không chỉ là website, đây là trợ lý ảo đắc lực cho doanh nghiệp của bạn.
+                </p>
+                <ul class="tech-list">
+                    <li><strong>MISA AVA AI:</strong> Cảnh báo rủi ro hóa đơn & thuế 24/7 theo thời gian thực.</li>
+                    <li><strong>Tra cứu thông minh:</strong> Giải đáp Thông tư 99/2025/TT-BTC ngay tức thì.</li>
+                    <li><strong>Bộ máy tự tính thuế:</strong> Ước tính thuế TNDN, TNCN chính xác.</li>
+                    <li><strong>Đa nền tảng:</strong> CEO xem báo cáo tài chính mọi lúc trên Mobile App.</li>
+                </ul>
+            </div>
+            <div class="tech-visual">
+                <!-- CSS Graphic mô phỏng Dashboard -->
+                <div class="mockup-screen">
+                    <div class="mockup-header">
+                        <span class="dot red"></span>
+                        <span class="dot yellow"></span>
+                        <span class="dot green"></span>
+                    </div>
+                    <div class="mockup-body">
+                        <div class="chart-line"></div>
+                        <div class="chart-bar"></div>
+                        <div class="alert-box">⚠️ Cảnh báo: Hóa đơn 00123 rủi ro cao</div>
+                        <div class="success-box">✅ Đã tối ưu chi phí thuế quý 3</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- BLOG SECTION -->
+    <section id="blog" class="section blog-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="sub-heading">Kho Tri Thức</span>
+                <h2 class="heading">Tin Tức & Văn Bản Pháp Luật</h2>
+                <p>Cập nhật mới nhất về Thông tư, Chính sách thuế và Quản trị doanh nghiệp.</p>
+                <div class="divider"></div>
+            </div>
+
+            <!-- Nơi hiển thị danh sách bài viết (Chỉ 3 bài mới nhất) -->
+            <div class="grid-3" id="home-blog-list">
+                <!-- Blog Items will be injected here by JS -->
+                <p style="text-align: center; width: 100%; grid-column: span 3;">Đang tải bài viết...</p>
+            </div>
+            
+            <!-- Nút xem tất cả -->
+            <div style="text-align: center; margin-top: 50px;">
+                <a href="blog.html" class="btn btn-outline" style="color:var(--primary-color); border-color:var(--primary-color);">Xem Tất Cả Tin Tức</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ACADEMY SECTION -->
+    <section class="section academy">
+        <div class="container">
+            <div class="section-header">
+                <span class="sub-heading">Chia Sẻ Tri Thức</span>
+                <h2 class="heading">Diệu Tâm Academy</h2>
+                <p>Nơi đào tạo thực chiến từ Case Study các tập đoàn lớn (Vingroup, Ritz Carlton).</p>
+                <div class="divider"></div>
+            </div>
+            <div class="grid-2">
+                <div class="course-card">
+                    <h3>Khóa Học Kế Toán Thực Chiến</h3>
+                    <p>Thành thạo MISA, FAST, Excel từ A-Z. Xử lý tình huống thực tế, không lý thuyết suông.</p>
+                </div>
+                <div class="course-card">
+                    <h3>Tài Chính Dành Cho CEO</h3>
+                    <p>Đọc hiểu báo cáo tài chính, kiểm soát dòng tiền và quản trị rủi ro dành riêng cho chủ doanh nghiệp.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRICING SECTION -->
+    <section id="pricing" class="section pricing">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="heading">Bảng Giá Minh Bạch</h2>
+                <p>Tối ưu chi phí cho từng giai đoạn phát triển.</p>
+                <div class="divider"></div>
+            </div>
+
+            <div class="pricing-table">
+                <div class="pricing-card">
+                    <div class="price-header">
+                        <h3>Khởi Nghiệp</h3>
+                        <span class="price">400K <small>/tháng</small></span>
+                        <p>Thương mại / Dịch vụ (0 hóa đơn)</p>
+                    </div>
+                    <div class="price-body">
+                        <ul>
+                            <li>Báo cáo thuế hàng quý</li>
+                            <li>Tư vấn pháp lý cơ bản</li>
+                            <li>Hỗ trợ giải trình thuế</li>
+                        </ul>
+                        <a href="#contact" class="btn btn-outline">Chọn Gói Này</a>
+                    </div>
+                </div>
+
+                <div class="pricing-card popular">
+                    <div class="tag">Phổ Biến Nhất</div>
+                    <div class="price-header">
+                        <h3>Tăng Trưởng</h3>
+                        <span class="price">1.2tr <small>/tháng</small></span>
+                        <p>Sản xuất / Xây dựng (1-10 hóa đơn)</p>
+                    </div>
+                    <div class="price-body">
+                        <ul>
+                            <li>Tất cả quyền lợi gói Khởi Nghiệp</li>
+                            <li>Cân đối chi phí đầu vào/ra</li>
+                            <li>Cảnh báo rủi ro hóa đơn</li>
+                        </ul>
+                        <a href="#contact" class="btn btn-primary">Chọn Gói Này</a>
+                    </div>
+                </div>
+
+                <div class="pricing-card">
+                    <div class="price-header">
+                        <h3>Doanh Nghiệp FDI</h3>
+                        <span class="price">Thỏa Thuận</span>
+                        <p>Theo đặc thù quy mô</p>
+                    </div>
+                    <div class="price-body">
+                        <ul>
+                            <li>Báo cáo chuẩn IFRS/VAS</li>
+                            <li>Song ngữ (Anh/Nhật/Hàn)</li>
+                            <li>Tư vấn hoàn thuế & Chuyển giá</li>
+                        </ul>
+                        <a href="#contact" class="btn btn-outline">Liên Hệ Ngay</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer id="contact">
+        <div class="container footer-content">
+            <div class="footer-col">
+                <h3>KẾ TOÁN DIỆU TÂM</h3>
+                <p>"Diệu từ Trí – Tâm từ Lòng"</p>
+                <p>Chúng tôi là hệ thống định vị GPS tài chính cho doanh nghiệp của bạn.</p>
+            </div>
+            <div class="footer-col">
+                <h3>Mạng Lưới Văn Phòng</h3>
+                <p><strong>TP.HCM:</strong> Tòa nhà Central Park, 208 Nguyễn Trãi, Q.1</p>
+                <p><strong>Hà Nội:</strong> Tòa nhà Việt Á, 09 Duy Tân, Cầu Giấy</p>
+                <p><strong>Đà Nẵng:</strong> Số 2 Đường 30/4, Q. Hải Châu</p>
+            </div>
+            <div class="footer-col">
+                <h3>Kết Nối</h3>
+                <p>Hotline 24/7: <a href="tel:0900000000" style="color: var(--accent-color);">09xx.xxx.xxx</a></p>
+                <div class="social-links">
+                    <a href="#">Zalo</a>
+                    <a href="#">Facebook</a>
+                    <a href="#">LinkedIn</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Kế Toán Diệu Tâm. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Liên kết module JS -->
+    <script src="./script.js"></script>
+</body>
+</html>
