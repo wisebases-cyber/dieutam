@@ -522,7 +522,7 @@
             font-size: 1.4rem;
         }
 
-        /* --- 10. BLOG SECTION STYLES --- */
+        /* --- 10. BLOG SECTION STYLES (UPDATED WITH IMAGE) --- */
         .blog-section {
             background-color: var(--white);
         }
@@ -532,6 +532,33 @@
             display: flex;
             flex-direction: column;
             height: 100%;
+            padding: 0; /* Remove default padding to allow image full width */
+            overflow: hidden; /* Round corners for image */
+        }
+
+        .blog-thumb {
+            width: 100%;
+            height: 200px;
+            overflow: hidden;
+            background: #eee;
+        }
+
+        .blog-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .blog-card:hover .blog-thumb img {
+            transform: scale(1.1);
+        }
+
+        .blog-content {
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
         }
 
         .blog-date {
@@ -543,18 +570,19 @@
         .blog-title {
             font-size: 1.2rem;
             color: var(--primary-color);
-            margin-bottom: 15px;
+            margin-bottom: 10px;
             font-weight: 700;
+            line-height: 1.4;
         }
 
         .blog-excerpt {
             font-size: 0.95rem;
             color: #555;
             flex-grow: 1;
+            margin-bottom: 15px;
         }
 
         .read-more-btn {
-            margin-top: 20px;
             color: var(--accent-color);
             font-weight: 600;
             font-size: 0.9rem;

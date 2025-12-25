@@ -3,17 +3,11 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- 1. DỮ LIỆU BÀI VIẾT (DATABASE GIẢ LẬP) ---
     const blogPosts = [
         {
-            id: 'thu-choi',
-            title: 'Case Study: Thử chơi',
-            date: '12/05/2025',
-            excerpt: 'Bài viết test thử nghiệm hệ thống blog markdown static.',
-            file: './posts/thuchoi.md'
-        },
-        {
             id: 'thong-tu-99',
             title: 'Hướng dẫn Thông tư 99/2025/TT-BTC mới nhất',
             date: '10/05/2025',
             excerpt: 'Những điểm mới về thuế GTGT và TNDN áp dụng cho năm tài chính 2026 mà doanh nghiệp cần lưu ý.',
+            image: 'https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&q=80&w=800', // Ảnh tài liệu/thuế
             file: './posts/bai-viet-1.md'
         },
         {
@@ -21,6 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
             title: 'Phân biệt Vốn Điều Lệ & Vốn Pháp Định',
             date: '08/05/2025',
             excerpt: 'Rủi ro pháp lý khi kê khai sai vốn. Hướng dẫn các thủ tục tăng/giảm vốn điều lệ đúng luật.',
+            image: 'https://images.unsplash.com/photo-1565514020176-dbf227747046?auto=format&fit=crop&q=80&w=800', // Ảnh tiền tệ/vốn
             file: './posts/bai-viet-2.md'
         },
         {
@@ -28,7 +23,16 @@ document.addEventListener('DOMContentLoaded', () => {
             title: 'Case Study: Giải quyết khủng hoảng thuế cho DN FDI',
             date: '01/05/2025',
             excerpt: 'Câu chuyện thực tế về cách Diệu Tâm hỗ trợ một doanh nghiệp Nhật Bản hoàn thuế 20 tỷ đồng.',
+            image: 'https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&q=80&w=800', // Ảnh bắt tay/hợp tác
             file: './posts/bai-viet-3.md'
+        },
+        {
+            id: 'thu-choi',
+            title: 'Case Study: Thử chơi',
+            date: '12/05/2025',
+            excerpt: 'Bài viết test thử nghiệm hệ thống blog markdown static.',
+            image: 'https://images.unsplash.com/photo-1497215728101-856f4ea42174?auto=format&fit=crop&q=80&w=800', // Ảnh văn phòng
+            file: './posts/thuchoi.md'
         }
     ];
 
@@ -70,11 +74,17 @@ document.addEventListener('DOMContentLoaded', () => {
                 window.location.href = `post.html#${post.id}`;
             };
             
+            // Cập nhật cấu trúc HTML card để có hình ảnh
             card.innerHTML = `
-                <div class="blog-date">${post.date}</div>
-                <h3 class="blog-title">${post.title}</h3>
-                <p class="blog-excerpt">${post.excerpt}</p>
-                <span class="read-more-btn">Đọc chi tiết →</span>
+                <div class="blog-thumb">
+                    <img src="${post.image}" alt="${post.title}" loading="lazy">
+                </div>
+                <div class="blog-content">
+                    <div class="blog-date">${post.date}</div>
+                    <h3 class="blog-title">${post.title}</h3>
+                    <p class="blog-excerpt">${post.excerpt}</p>
+                    <span class="read-more-btn">Đọc chi tiết →</span>
+                </div>
             `;
             container.appendChild(card);
         });
@@ -83,7 +93,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // Hàm xử lý trang chi tiết bài viết
     async function renderPostDetail(container) {
         // UPDATE: Lấy ID từ Hash URL (loại bỏ dấu # ở đầu)
-        // Ví dụ: post.html#von-dieu-le -> postId = von-dieu-le
         const postId = window.location.hash.substring(1);
 
         if (!postId) {
@@ -126,10 +135,17 @@ document.addEventListener('DOMContentLoaded', () => {
             
             container.innerHTML = `
                 <div class="post-header">
-                    <span class="post-date">${post.date}</span>
+                    <div class="post-meta">
+                        <span class="post-date">${post.date}</span>
+                    </div>
                     <h1 class="post-heading">${post.title}</h1>
                     <div class="divider" style="margin: 20px 0;"></div>
                 </div>
+                
+                <div class="post-cover-image">
+                    <img src="${post.image}" alt="${post.title}">
+                </div>
+
                 <div class="post-content">
                     ${htmlContent}
                 </div>
