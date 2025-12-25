@@ -215,7 +215,12 @@
 
         /* --- 4. HERO SECTION --- */
         .hero {
-            background: linear-gradient(135deg, var(--primary-color) 0%, #051937 100%);
+            /* Thêm hình nền chuyên nghiệp */
+            background: linear-gradient(135deg, rgba(15, 44, 89, 0.9) 0%, rgba(5, 25, 55, 0.85) 100%), 
+                        url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed; /* Hiệu ứng Parallax nhẹ */
             color: var(--white);
             padding: 180px 0 120px;
             text-align: center;
@@ -256,6 +261,7 @@
             margin-bottom: 20px;
             letter-spacing: 3px;
             font-weight: 600;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
         }
 
         .hero-title {
@@ -263,13 +269,14 @@
             margin-bottom: 25px;
             line-height: 1.2;
             font-weight: 800;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
         }
 
         .hero-desc {
             font-size: 1.2rem;
             max-width: 700px;
             margin: 0 auto 40px;
-            color: rgba(255, 255, 255, 0.9);
+            color: rgba(255, 255, 255, 0.95);
             font-weight: 300;
         }
 
@@ -345,17 +352,38 @@
 
         .service-item:hover {
             transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
         }
 
-        .service-img-placeholder {
-            height: 160px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            color: var(--primary-color);
-            font-size: 1.2rem;
-            border-bottom: 1px solid #eee;
+        /* Cập nhật style cho ảnh dịch vụ */
+        .service-img-wrapper {
+            width: 100%;
+            height: 220px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .service-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .service-item:hover .service-img {
+            transform: scale(1.1); /* Zoom ảnh khi hover */
+        }
+
+        .service-label {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            background: rgba(15, 44, 89, 0.9);
+            color: #fff;
+            padding: 5px 15px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            border-top-right-radius: 8px;
         }
 
         .service-content {
@@ -391,6 +419,7 @@
             background-color: var(--primary-color);
             color: var(--white);
             position: relative;
+            overflow: hidden; /* Để hiệu ứng float không bị tràn */
         }
 
         .tech-container {
@@ -421,76 +450,58 @@
             min-width: 100px;
         }
 
-        /* Mockup CSS Only */
-        .mockup-screen {
-            background: #fff;
-            border-radius: 12px;
-            padding: 20px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.4);
-            border: 1px solid rgba(255,255,255,0.1);
-        }
-
-        .mockup-header {
-            display: flex;
-            gap: 8px;
-            margin-bottom: 20px;
-            padding-bottom: 15px;
-            border-bottom: 1px solid #eee;
-        }
-
-        .dot { width: 12px; height: 12px; border-radius: 50%; }
-        .red { background: #ff5f56; }
-        .yellow { background: #ffbd2e; }
-        .green { background: #27c93f; }
-
-        .mockup-body {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-
-        .chart-line {
-            height: 120px;
-            background: linear-gradient(180deg, rgba(15, 44, 89, 0.1) 0%, rgba(255,255,255,0) 100%);
-            border-radius: 4px;
-            border-top: 2px solid var(--primary-color);
+        /* NEW TECH VISUAL STYLES */
+        .tech-image-wrapper {
             position: relative;
-        }
-        
-        .chart-bar {
-            height: 10px;
-            width: 60%;
-            background: #eee;
-            border-radius: 5px;
-        }
-        
-        .chart-bar::after {
-            content: '';
-            display: block;
-            height: 100%;
-            width: 70%;
-            background: var(--accent-color);
-            border-radius: 5px;
+            padding: 20px;
         }
 
-        .alert-box {
-            background: #ffebee;
-            color: #c62828;
-            padding: 12px;
-            border-radius: 6px;
+        .tech-main-img {
+            border-radius: 12px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            border: 1px solid rgba(255,255,255,0.1);
+            transform: perspective(1000px) rotateY(-5deg);
+            transition: var(--transition);
+        }
+
+        .tech-image-wrapper:hover .tech-main-img {
+            transform: perspective(1000px) rotateY(0deg);
+        }
+
+        .floating-card {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 12px 20px;
+            border-radius: 8px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            font-weight: 600;
             font-size: 0.9rem;
-            font-weight: bold;
             display: flex;
             align-items: center;
+            gap: 10px;
+            z-index: 2;
+            animation: float 4s ease-in-out infinite;
         }
 
-        .success-box {
-            background: #e8f5e9;
+        .card-alert {
+            bottom: 40px;
+            left: -20px;
+            color: #d32f2f;
+            border-left: 4px solid #d32f2f;
+        }
+
+        .card-success {
+            top: 40px;
+            right: -10px;
             color: #2e7d32;
-            padding: 12px;
-            border-radius: 6px;
-            font-size: 0.9rem;
-            font-weight: bold;
+            border-left: 4px solid #2e7d32;
+            animation-delay: 2s; /* Lệch pha để chuyển động tự nhiên */
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
         }
 
         /* --- 9. ACADEMY SECTION --- */
@@ -751,6 +762,11 @@
             .hero-buttons .btn { width: 100%; }
             
             .footer-content { grid-template-columns: 1fr; }
+            
+            /* Responsive cho phần Tech mới */
+            .tech-image-wrapper { padding: 0; }
+            .card-alert { left: 0; bottom: -20px; }
+            .card-success { right: 0; top: -10px; }
         }
     </style>
 </head>
@@ -837,8 +853,9 @@
             <div class="grid-3">
                 <!-- Service 1 -->
                 <div class="service-item">
-                    <div class="service-img-placeholder" style="background-color: #e3f2fd;">
-                        <span>Pháp Lý & Thành Lập</span>
+                    <div class="service-img-wrapper">
+                        <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&q=80&w=800" alt="Pháp Lý & Thành Lập" class="service-img">
+                        <span class="service-label">Pháp Lý</span>
                     </div>
                     <div class="service-content">
                         <h3>Pháp Lý Doanh Nghiệp</h3>
@@ -853,8 +870,9 @@
 
                 <!-- Service 2 -->
                 <div class="service-item">
-                    <div class="service-img-placeholder" style="background-color: #fff8e1;">
-                        <span>Kế Toán & Thuế</span>
+                    <div class="service-img-wrapper">
+                        <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&q=80&w=800" alt="Kế Toán & Thuế" class="service-img">
+                        <span class="service-label">Kế Toán - Thuế</span>
                     </div>
                     <div class="service-content">
                         <h3>Kế Toán - Thuế Chuyên Sâu</h3>
@@ -869,8 +887,9 @@
 
                 <!-- Service 3 -->
                 <div class="service-item">
-                    <div class="service-img-placeholder" style="background-color: #e8f5e9;">
-                        <span>Nhân Sự & C&B</span>
+                    <div class="service-img-wrapper">
+                        <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80&w=800" alt="Nhân Sự & C&B" class="service-img">
+                        <span class="service-label">Nhân Sự</span>
                     </div>
                     <div class="service-content">
                         <h3>Quản Trị Nhân Sự (C&B)</h3>
@@ -903,18 +922,16 @@
                 </ul>
             </div>
             <div class="tech-visual">
-                <!-- CSS Graphic mô phỏng Dashboard -->
-                <div class="mockup-screen">
-                    <div class="mockup-header">
-                        <span class="dot red"></span>
-                        <span class="dot yellow"></span>
-                        <span class="dot green"></span>
+                <!-- Thay thế Mockup cũ bằng ảnh thật chất lượng cao + Floating Cards -->
+                <div class="tech-image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=800" alt="Financial Dashboard" class="tech-main-img">
+                    
+                    <!-- Floating Cards -->
+                    <div class="floating-card card-alert">
+                        ⚠️ Cảnh báo: Hóa đơn 00123 rủi ro cao
                     </div>
-                    <div class="mockup-body">
-                        <div class="chart-line"></div>
-                        <div class="chart-bar"></div>
-                        <div class="alert-box">⚠️ Cảnh báo: Hóa đơn 00123 rủi ro cao</div>
-                        <div class="success-box">✅ Đã tối ưu chi phí thuế quý 3</div>
+                    <div class="floating-card card-success">
+                        ✅ Đã tối ưu chi phí thuế quý 3
                     </div>
                 </div>
             </div>

@@ -26,18 +26,42 @@
         .header-container { display: flex; justify-content: space-between; align-items: center; width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 20px; }
         .logo { font-size: 1.5rem; font-weight: 800; color: var(--primary-color); }
         .logo span { color: var(--accent-color); font-weight: 400; }
+        
         .nav-list { display: flex; gap: 30px; align-items: center; }
-        .nav-link { font-weight: 500; font-size: 0.95rem; }
-        .nav-link:hover { color: var(--accent-color); }
+        .nav-link { font-weight: 500; font-size: 0.95rem; transition: var(--transition); }
+        .nav-link:not(.btn-contact):hover { color: var(--accent-color); }
         .btn-contact { background-color: var(--primary-color); color: var(--white); padding: 8px 20px; border-radius: 4px; }
+        .btn-contact:hover { background-color: var(--accent-color); color: var(--white); }
         
         /* Mobile Hamburger */
         .hamburger { display: none; cursor: pointer; }
-        .bar { display: block; width: 25px; height: 3px; margin: 5px auto; background-color: var(--primary-color); }
-        @media (max-width: 768px) {
-            .hamburger { display: block; }
-            .nav-list { display: none; } /* Ẩn menu trên trang chi tiết mobile cho gọn, chỉ để logo và hamburger nếu muốn mở rộng sau */
-            .nav-list.active { display: flex; position: fixed; top: 70px; left: 0; width: 100%; height: calc(100vh - 70px); background: #fff; flex-direction: column; padding-top: 50px; }
+        .bar { display: block; width: 25px; height: 3px; margin: 5px auto; background-color: var(--primary-color); transition: var(--transition); }
+        
+        @media (max-width: 992px) {
+             /* Ẩn menu text trên tablet/mobile để tránh vỡ layout */
+             .nav-list { display: none; }
+             .hamburger { display: block; }
+             
+             /* Mobile Menu Drawer */
+             .nav-list.active { 
+                display: flex; 
+                position: fixed; 
+                top: 70px; 
+                left: 0; 
+                width: 100%; 
+                height: calc(100vh - 70px); 
+                background: #fff; 
+                flex-direction: column; 
+                padding-top: 50px; 
+                box-shadow: 0 10px 10px rgba(0,0,0,0.1);
+                text-align: center;
+             }
+             .nav-list.active li { margin: 15px 0; width: 100%; }
+             
+             /* Hamburger Animation */
+             .hamburger.active .bar:nth-child(2) { opacity: 0; }
+             .hamburger.active .bar:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+             .hamburger.active .bar:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
         }
 
         /* Post Content Styles */
@@ -80,8 +104,12 @@
             <nav class="navbar">
                 <ul class="nav-list">
                     <li><a href="index.html" class="nav-link">Trang Chủ</a></li>
+                    <li><a href="index.html#about" class="nav-link">Về Chúng Tôi</a></li>
+                    <li><a href="index.html#services" class="nav-link">Dịch Vụ</a></li>
+                    <li><a href="index.html#technology" class="nav-link">Công Nghệ AI</a></li>
                     <li><a href="blog.html" class="nav-link" style="color: var(--accent-color);">Tin Tức</a></li>
-                    <li><a href="index.html#contact" class="nav-link btn-contact">Liên Hệ</a></li>
+                    <li><a href="index.html#pricing" class="nav-link">Bảng Giá</a></li>
+                    <li><a href="index.html#contact" class="nav-link btn-contact">Liên Hệ Ngay</a></li>
                 </ul>
             </nav>
             <div class="hamburger" id="hamburger">
