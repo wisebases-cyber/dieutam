@@ -50,6 +50,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Case 3: Trang Chi Tiết Bài Viết (Render nội dung Markdown)
     if (postDetailContainer) {
+        // Lắng nghe sự kiện hashchange để cập nhật nội dung khi người dùng ấn Back/Forward
+        window.addEventListener('hashchange', () => renderPostDetail(postDetailContainer));
+        
+        // Render lần đầu tiên
         renderPostDetail(postDetailContainer);
     }
 
@@ -61,9 +65,9 @@ document.addEventListener('DOMContentLoaded', () => {
         posts.forEach(post => {
             const card = document.createElement('div');
             card.className = 'card blog-card';
-            // Khi click vào thẻ card, chuyển hướng sang trang post.html kèm ID
+            // UPDATE: Sử dụng Hash (#) thay vì Query Param (?)
             card.onclick = () => {
-                window.location.href = `post.html?id=${post.id}`;
+                window.location.href = `post.html#${post.id}`;
             };
             
             card.innerHTML = `
@@ -78,9 +82,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Hàm xử lý trang chi tiết bài viết
     async function renderPostDetail(container) {
-        // Lấy ID từ URL (ví dụ: post.html?id=thong-tu-99)
-        const urlParams = new URLSearchParams(window.location.search);
-        const postId = urlParams.get('id');
+        // UPDATE: Lấy ID từ Hash URL (loại bỏ dấu # ở đầu)
+        // Ví dụ: post.html#von-dieu-le -> postId = von-dieu-le
+        const postId = window.location.hash.substring(1);
+
+        if (!postId) {
+             container.innerHTML = `
+                <div style="text-align: center; padding: 50px;">
+                    <p>Vui lòng chọn một bài viết để xem.</p>
+                    <a href="blog.html" class="btn btn-primary" style="margin-top:20px;">Xem danh sách tin tức</a>
+                </div>
+            `;
+            return;
+        }
 
         // Tìm bài viết trong dữ liệu
         const post = blogPosts.find(p => p.id === postId);
@@ -123,13 +137,16 @@ document.addEventListener('DOMContentLoaded', () => {
                     <a href="blog.html" class="btn btn-outline" style="color:var(--primary-color); border-color:var(--primary-color);">← Quay lại danh sách tin tức</a>
                 </div>
             `;
+            
+            // Scroll lên đầu trang khi load xong bài viết mới
+            window.scrollTo(0, 0);
 
         } catch (error) {
             container.innerHTML = `<p style="color:red; text-align:center;">Lỗi: Không thể tải nội dung bài viết. (${error.message})</p>`;
         }
     }
 
-    // Hàm parse Markdown (Giữ nguyên từ version trước)
+    // Hàm parse Markdown (Giữ nguyên)
     function parseMarkdown(markdown) {
         let html = markdown;
         html = html.replace(/^###### (.*$)/gim, '<h6>$1</h6>');
@@ -148,12 +165,10 @@ document.addEventListener('DOMContentLoaded', () => {
         html = '<p>' + html + '</p>';
         html = html.replace(/<p><\/p>/gim, '');
         // Xử lý bảng (Table) cơ bản cho Markdown
-        // (Đây là bổ sung nhỏ để bảng hiển thị đẹp hơn nếu bài viết có bảng)
         html = html.replace(/\|(.+)\|/g, (match) => {
             const cells = match.split('|').filter(c => c.trim() !== '');
             return '<tr>' + cells.map(c => `<td>${c.trim()}</td>`).join('') + '</tr>';
         });
-        // Wrap tr in table (hacky simple way)
         if (html.includes('<tr>')) {
              html = html.replace(/((<tr>.*<\/tr>)\s*)+/g, '<table class="md-table"><tbody>$&</tbody></table>');
         }
